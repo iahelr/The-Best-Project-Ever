@@ -8,11 +8,11 @@
 #ifndef PLNOBSTACLEAVOID_H_
 #define PLNOBSTACLEAVOID_H_
 
-#include "../behaviors/Behavior.h"
+#include "../Behaviors/Behavior.h"
 #include "Plan.h"
-#include "../behaviors/A.h"
-#include "../behaviors/B.h"
-#include "../behaviors/C.h"
+#include "../Behaviors/A.h"
+#include "../Behaviors/B.h"
+#include "../Behaviors/C.h"
 
 class PlnObstacleAvoid : public Plan
 {

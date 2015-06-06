@@ -1,5 +1,5 @@
-Manager.d: ../Manager.cpp ../Manager.h ../behaviors/Behavior.h \
- ../behaviors/../Robot.h \
+Manager.d: ../Manager.cpp ../Manager.h ../Behaviors/Behavior.h \
+ ../Behaviors/../Robot.h \
  /usr/local/include/player-2.0/libplayerc++/playerc++.h \
  /usr/local/include/player-2.0/libplayerc/playerc.h \
  /usr/local/include/player-2.0/libplayercore/player.h \
@@ -13,16 +13,16 @@ Manager.d: ../Manager.cpp ../Manager.h ../behaviors/Behavior.h \
  /usr/local/include/player-2.0/libplayerc++/playerclient.h \
  /usr/local/include/player-2.0/libplayerc++/playererror.h \
  /usr/local/include/player-2.0/libplayerc++/clientproxy.h \
- ../Plans/PlnObstacleAvoid.h ../Plans/../behaviors/Behavior.h \
- ../Plans/Plan.h ../Plans/../Robot.h ../Plans/../behaviors/A.h \
- ../Plans/../behaviors/Behavior.h ../Plans/../behaviors/../Robot.h \
- ../Plans/../behaviors/B.h ../Plans/../behaviors/C.h ../Robot.h
+ ../Plans/PlnObstacleAvoid.h ../Plans/../Behaviors/Behavior.h \
+ ../Plans/Plan.h ../Plans/../Robot.h ../Plans/../Behaviors/A.h \
+ ../Plans/../Behaviors/Behavior.h ../Plans/../Behaviors/../Robot.h \
+ ../Plans/../Behaviors/B.h ../Plans/../Behaviors/C.h ../Robot.h
 
 ../Manager.h:
 
-../behaviors/Behavior.h:
+../Behaviors/Behavior.h:
 
-../behaviors/../Robot.h:
+../Behaviors/../Robot.h:
 
 /usr/local/include/player-2.0/libplayerc++/playerc++.h:
 
@@ -52,20 +52,20 @@ Manager.d: ../Manager.cpp ../Manager.h ../behaviors/Behavior.h \
 
 ../Plans/PlnObstacleAvoid.h:
 
-../Plans/../behaviors/Behavior.h:
+../Plans/../Behaviors/Behavior.h:
 
 ../Plans/Plan.h:
 
 ../Plans/../Robot.h:
 
-../Plans/../behaviors/A.h:
+../Plans/../Behaviors/A.h:
 
-../Plans/../behaviors/Behavior.h:
+../Plans/../Behaviors/Behavior.h:
 
-../Plans/../behaviors/../Robot.h:
+../Plans/../Behaviors/../Robot.h:
 
-../Plans/../behaviors/B.h:
+../Plans/../Behaviors/B.h:
 
-../Plans/../behaviors/C.h:
+../Plans/../Behaviors/C.h:
 
 ../Robot.h:

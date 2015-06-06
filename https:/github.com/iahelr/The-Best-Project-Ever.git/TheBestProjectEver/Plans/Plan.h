@@ -7,7 +7,7 @@
 
 #ifndef PLAN_H_
 #define PLAN_H_
-#include "../behaviors/Behavior.h"
+#include "../Behaviors/Behavior.h"
 #include "../Robot.h"
 class Plan {
 

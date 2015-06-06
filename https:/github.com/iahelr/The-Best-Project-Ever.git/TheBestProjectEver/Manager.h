@@ -8,7 +8,7 @@
 #ifndef MANAGER_H_
 #define MANAGER_H_
 
-#include "behaviors/Behavior.h"
+#include "Behaviors/Behavior.h"
 #include "Plans/PlnObstacleAvoid.h"
 #include "Robot.h"
 
