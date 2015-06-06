@@ -5,16 +5,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../Manager.cpp \
+../Map.cpp \
 ../Robot.cpp \
 ../main.cpp 
 
 OBJS += \
 ./Manager.o \
+./Map.o \
 ./Robot.o \
 ./main.o 
 
 CPP_DEPS += \
 ./Manager.d \
+./Map.d \
 ./Robot.d \
 ./main.d 
 

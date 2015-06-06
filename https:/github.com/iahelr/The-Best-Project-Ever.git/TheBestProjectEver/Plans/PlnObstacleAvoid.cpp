@@ -9,7 +9,7 @@
 
 PlnObstacleAvoid::PlnObstacleAvoid(Robot* robot) : Plan(robot)
 {
-	//Creating Behaviors
+	/*//Creating Behaviors
 	_beh[0] = new A(robot);
 	_beh[1] = new B(robot);
 	_beh[2] = new C(robot);
@@ -19,7 +19,7 @@ PlnObstacleAvoid::PlnObstacleAvoid(Robot* robot) : Plan(robot)
 	_beh[0]->addBeh(_beh[2]);
 	_beh[1]->addBeh(_beh[2]);
 	_beh[2]->addBeh(_beh[0]);
-	_start = _beh[0];
+	_start = _beh[0];*/
 }
 
 PlnObstacleAvoid::~PlnObstacleAvoid()

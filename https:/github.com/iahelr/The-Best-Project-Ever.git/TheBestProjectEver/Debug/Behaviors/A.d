@@ -12,7 +12,8 @@ Behaviors/A.d: ../Behaviors/A.cpp ../Behaviors/A.h \
  /usr/local/include/player-2.0/libplayerc++/playerc++config.h \
  /usr/local/include/player-2.0/libplayerc++/playerclient.h \
  /usr/local/include/player-2.0/libplayerc++/playererror.h \
- /usr/local/include/player-2.0/libplayerc++/clientproxy.h
+ /usr/local/include/player-2.0/libplayerc++/clientproxy.h \
+ ../Behaviors/ActionResult.h
 
 ../Behaviors/A.h:
 
@@ -45,3 +46,5 @@ Behaviors/A.d: ../Behaviors/A.cpp ../Behaviors/A.h \
 /usr/local/include/player-2.0/libplayerc++/playererror.h:
 
 /usr/local/include/player-2.0/libplayerc++/clientproxy.h:
+
+../Behaviors/ActionResult.h:

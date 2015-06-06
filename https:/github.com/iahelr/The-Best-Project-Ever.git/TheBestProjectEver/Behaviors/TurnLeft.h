@@ -1,23 +1,23 @@
 /*
- * TurnRight.h
+ * TurnLeft.h
  *
  *  Created on: Jun 6, 2015
  *      Author: colman
  */
 
-#ifndef TURNRIGHT_H_
-#define TURNRIGHT_H_
+#ifndef TURNLEFT_H_
+#define TURNLEFT_H_
 
 #include "Behavior.h"
 #include "../Plans/Resources.h"
 
-class TurnRight: public Behavior {
+class TurnLeft: public Behavior {
 public:
-	TurnRight(Robot* robot);
+	TurnLeft(Robot* robot);
 	bool startCond();
 	bool stopCond();
 	ActionResult action();
-	virtual ~TurnRight();
+	virtual ~TurnLeft();
 };
 
-#endif /* TURNRIGHT_H_ */
+#endif /* TURNLEFT_H_ */

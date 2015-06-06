@@ -18,7 +18,7 @@ public:
 	virtual ~B();
 	virtual bool startCond() { return false; };
 	virtual bool stopCond() { return false; };
-	virtual void action() {};
+	virtual ActionResult action() {};
 };
 
 #endif /* B_H_ */
