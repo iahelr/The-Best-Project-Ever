@@ -1,37 +1,33 @@
 /*
  * Behavior.h
  *
- *  Created on: Dec 14, 2014
- *      Author: user
+ *  Created on: Jun 6, 2015
+ *      Author: colman
  */
-
 #ifndef BEHAVIOR_H_
 #define BEHAVIOR_H_
-#include <vector>
 #include "../Robot.h"
-using namespace std;
+//#include "../Helpers/MappingHelper.h"
 
-class Behavior {
-	vector<Behavior*> _behVect;
+#include "ActionResult.h"
+//#include "../Helpers/MovmentHelper.h"
+
+class Behavior
+{
+	Behavior** _next;
+	int _arrSize;
 protected:
-	Robot* _robot;
-public:
-	Behavior(Robot* robot);
-	virtual ~Behavior();
-	virtual bool startCond() = 0;
-	virtual bool stopCond() = 0;
-	virtual void action() = 0;
-	void addBeh(Behavior* next)
-	{
-		_behVect.push_back(next);
-	}
-	Behavior* selectNext()
-	{
-		//Run over vector and return first true
-		//startCond of the first behavior
-		return NULL;
-	}
+Robot* _robot;
+public:	Behavior(Robot* robot);
+virtual bool startCond() = 0;
+virtual bool stopCond() = 0;
+virtual ActionResult action() = 0;
+Behavior* addNext(Behavior* behavior);
+Behavior* selectNext();
+bool isFree(int startIndex, int endIndex, double distance);
+virtual ~Behavior();
 
 };
 
 #endif /* BEHAVIOR_H_ */
+
