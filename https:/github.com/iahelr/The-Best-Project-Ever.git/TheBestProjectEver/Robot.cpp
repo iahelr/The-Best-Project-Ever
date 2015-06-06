@@ -1,14 +1,13 @@
 /*
  * Robot.cpp
  *
- *  Created on: Jun 2, 2015
- *      Author: colman
+ *  Created on: Dec 14, 2014
+ *      Author: user
  */
 
 #include "Robot.h"
 
-Robot::Robot(char* ip, int port)
-{
+Robot::Robot(char* ip, int port) {
 	_pc = new PlayerClient(ip,port);
 	_pp = new Position2dProxy(_pc);
 	_lp = new LaserProxy(_pc);
@@ -19,11 +18,8 @@ Robot::Robot(char* ip, int port)
 		Read();
 }
 
-Robot::~Robot()
-{
+Robot::~Robot() {
 	delete _pc;
 	delete _pp;
 	delete _lp;
 }
-
-

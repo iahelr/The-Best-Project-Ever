@@ -7,8 +7,8 @@
 
 #include "Plan.h"
 
-Plan::Plan(Robot* robot) {
-
+Plan::Plan(Robot* robot)
+{
 
 }
 

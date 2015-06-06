@@ -4,23 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../AvoidObstaclePlan.cpp \
 ../Manager.cpp \
-../Plan.cpp \
 ../Robot.cpp \
 ../main.cpp 
 
 OBJS += \
-./AvoidObstaclePlan.o \
 ./Manager.o \
-./Plan.o \
 ./Robot.o \
 ./main.o 
 
 CPP_DEPS += \
-./AvoidObstaclePlan.d \
 ./Manager.d \
-./Plan.d \
 ./Robot.d \
 ./main.d 
 

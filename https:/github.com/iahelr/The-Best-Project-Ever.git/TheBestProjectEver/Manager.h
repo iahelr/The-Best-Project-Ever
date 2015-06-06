@@ -1,16 +1,25 @@
 /*
  * Manager.h
  *
- *  Created on: Jun 2, 2015
- *      Author: colman
+ *  Created on: Dec 21, 2014
+ *      Author: user
  */
 
 #ifndef MANAGER_H_
 #define MANAGER_H_
 
-class Manager {
+#include "behaviors/Behavior.h"
+#include "Plans/PlnObstacleAvoid.h"
+#include "Robot.h"
+
+class Manager
+{
+	Behavior* _curr;
+	Robot* _robot;
+
 public:
-	Manager();
+	Manager(Robot* robot, Plan* pln);
+	void run();
 	virtual ~Manager();
 };
 

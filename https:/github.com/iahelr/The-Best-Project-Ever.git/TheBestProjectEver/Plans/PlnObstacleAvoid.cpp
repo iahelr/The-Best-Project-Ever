@@ -5,9 +5,10 @@
  *      Author: user
  */
 
-#include "AvoidObstaclePlan.h"
+#include "PlnObstacleAvoid.h"
 
-AvoidObstaclePlan::AvoidObstaclePlan(Robot* robot) {
+PlnObstacleAvoid::PlnObstacleAvoid(Robot* robot) : Plan(robot)
+{
 	//Creating Behaviors
 	_beh[0] = new A(robot);
 	_beh[1] = new B(robot);
@@ -21,7 +22,8 @@ AvoidObstaclePlan::AvoidObstaclePlan(Robot* robot) {
 	_start = _beh[0];
 }
 
-AvoidObstaclePlan::~AvoidObstaclePlan() {
+PlnObstacleAvoid::~PlnObstacleAvoid()
+{
 	// TODO Auto-generated destructor stub
 	for(int i=0;i<3;i++)
 		delete _beh[i];

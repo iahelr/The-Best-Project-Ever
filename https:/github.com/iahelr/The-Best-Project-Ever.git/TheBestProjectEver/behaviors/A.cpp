@@ -1,18 +1,19 @@
 /*
- * Plan.cpp
+ * A.cpp
  *
- *  Created on: Jun 2, 2015
+ *  Created on: Jun 6, 2015
  *      Author: colman
  */
 
-#include "Plan.h"
+#include "A.h"
 
-Plan::Plan() {
+/*A::A() {
 	// TODO Auto-generated constructor stub
 
-}
+}*/
 
-Plan::~Plan() {
+A::~A()
+{
 	// TODO Auto-generated destructor stub
 }
 
