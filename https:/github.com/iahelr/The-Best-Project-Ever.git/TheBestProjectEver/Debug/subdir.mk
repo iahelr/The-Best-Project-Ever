@@ -7,18 +7,21 @@ CPP_SRCS += \
 ../Manager.cpp \
 ../Map.cpp \
 ../Robot.cpp \
+../Utils.cpp \
 ../main.cpp 
 
 OBJS += \
 ./Manager.o \
 ./Map.o \
 ./Robot.o \
+./Utils.o \
 ./main.o 
 
 CPP_DEPS += \
 ./Manager.d \
 ./Map.d \
 ./Robot.d \
+./Utils.d \
 ./main.d 
 
 

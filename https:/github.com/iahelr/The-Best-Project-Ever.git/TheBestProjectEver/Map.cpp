@@ -7,6 +7,9 @@
 
 #include "Map.h"
 
+double Map::map_resolution_in_cm = 0;
+double Map::grid_resolution_in_cm = 0;
+
 Map::Map()
 {
 	// TODO Auto-generated constructor stub
@@ -32,50 +35,53 @@ void Map::ReadMapFromPngToMatrix(const char* filename, int**& map_matrix, int& r
 	{
 		std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
 	}
-
-	// Initialize the map matrix
-	map_matrix = new int*[rows];
-	for (int row = 0; row < rows; row++)
+	// There is no error while reading the png file
+	else
 	{
-		map_matrix[row] = new int[cols];
-	}
-
-	// Run over all the rows
-	for (y = 0; y < height; y++)
-	{
-		// Run over all the cols
-		for (x = 0; x < width; x++)
+		// Initialize the map matrix
+		map_matrix = new int*[rows];
+		for (int row = 0; row < rows; row++)
 		{
-			// Checking if the current pixel is NOT BLACK (means a free cell)
-			if (image[y * width * 4 + x * 4 + 0] ||
-				image[y * width * 4 + x * 4 + 1] ||
-				image[y * width * 4 + x * 4 + 2])
+			map_matrix[row] = new int[cols];
+		}
+
+		// Run over all the rows
+		for (y = 0; y < height; y++)
+		{
+			// Run over all the cols
+			for (x = 0; x < width; x++)
 			{
-				map_matrix[y][x] = 0;
-			}
-			// The current pixel is BLACK (means a occupied cell)
-			else
-			{
-				map_matrix[y][x] = 1;
+				// Checking if the current pixel is NOT BLACK (means a free cell)
+				if (image[y * width * 4 + x * 4 + 0] ||
+					image[y * width * 4 + x * 4 + 1] ||
+					image[y * width * 4 + x * 4 + 2])
+				{
+					map_matrix[y][x] = 0;
+				}
+				// The current pixel is BLACK (means a occupied cell)
+				else
+				{
+					map_matrix[y][x] = 1;
+				}
 			}
 		}
 	}
 }
 
-void Map::InflateCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int inflation_factor)
+void Map::BlowCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int blowing_factor)
 {
-	// Set the cell indices where to start scan the inflated cells matrix
-	int nInflatedMatrixRowStart = cell_row - inflation_factor;
-	int nInflatedMatrixColStart = cell_col - inflation_factor;
+	// Set the cell indices where to start scan the blown cells matrix
+	int nBlowedMatrixRowStart = cell_row - blowing_factor;
+	int nBlowedMatrixColStart = cell_col - blowing_factor;
 
-	// Set the size of the inflated cells matrix
-	int nInflatedMatrixSize = (inflation_factor * 2) + 1;
+	// Set the size of the blown cells matrix
+	int nInflatedMatrixSize = (blowing_factor * 2) + 1;
 
-	// Running over all the rows in the inflated cells matrix
-	for (int row_index = nInflatedMatrixRowStart; row_index < nInflatedMatrixRowStart + nInflatedMatrixSize; row_index++)
+	// Running over all the rows in the blown cells matrix
+	for (int row_index = nBlowedMatrixRowStart; row_index < nBlowedMatrixRowStart + nInflatedMatrixSize; row_index++)
 	{
-		// Running over all the cols in the inflated cells matrix
-		for (int col_index = nInflatedMatrixColStart; col_index < nInflatedMatrixColStart + nInflatedMatrixSize; col_index++)
+		// Running over all the cols in the blown cells matrix
+		for (int col_index = nBlowedMatrixColStart; col_index < nBlowedMatrixColStart + nInflatedMatrixSize; col_index++)
 		{
 			// Validating that the current cell is inside the map borders
 			if (row_index >= 0 && row_index <= height - 1 && col_index >= 0 && col_index <= width - 1)
@@ -83,7 +89,7 @@ void Map::InflateCell(int**& map_matrix, int height, int width, int cell_row, in
 				// Checking if the current cell is free
 				if (map_matrix[row_index][col_index] == 0)
 				{
-					// Set this cell as inflated
+					// Set this cell as blown
 					map_matrix[row_index][col_index] = 2;
 				}
 			}
@@ -91,7 +97,7 @@ void Map::InflateCell(int**& map_matrix, int height, int width, int cell_row, in
 	}
 }
 
-void Map::InflateMap(int**& map_matrix, int height, int width, int inflation_factor)
+void Map::BlowMap(int**& map_matrix, int height, int width, int blowing_factor)
 {
 	// Run over all the rows in the map
 	for (int row = 0; row < height; row++)
@@ -102,29 +108,43 @@ void Map::InflateMap(int**& map_matrix, int height, int width, int inflation_fac
 			// Checking if the current cell is obstacle
 			if (map_matrix[row][col] == 1)
 			{
-				InflateCell(map_matrix, height, width, row, col, inflation_factor);
+				// Blow the current cell
+				BlowCell(map_matrix, height, width, row, col, blowing_factor);
 			}
 		}
 	}
 }
 
-void Map::ConvertMapToGrid(int**& map_matrix, int**& grid_matrix, int grid_rows, int grid_cols, int resolutions_ratio)
+void Map::ConvertMapToGrid()
 {
+	int resolutions_ratio = Map::grid_resolution_in_cm / Map::map_resolution_in_cm;
+
+	// Set the grid matrix dimensions
+	_grid_height = _map_height / resolutions_ratio + (_map_height % resolutions_ratio == 0 ? 0 : 1);
+	_grid_width = _map_width / resolutions_ratio + (_map_width % resolutions_ratio == 0 ? 0 : 1);
+
+	// Create the grid matrix
+	_grid_matrix = new int*[_grid_height];
+	for (int row = 0; row < _grid_height; row++)
+	{
+		_grid_matrix[row] = new int[_grid_width];
+	}
+
 	/*
 	 * Fill the grid matrix cells
 	 */
 
 	// Running over all the grid rows
-	for (int row = 0; row < grid_rows; row++)
+	for (int row = 0; row < _grid_height; row++)
 	{
 		// Running over all the grid cols
-		for (int col = 0; col < grid_cols; col++)
+		for (int col = 0; col < _grid_width; col++)
 		{
 			// Checking if the current cell belongs to borders of the map
-			if ((row == 0) || (row == grid_rows - 1) || (col == 0) || (col == grid_cols - 1))
+			if ((row == 0) || (row == _grid_height - 1) || (col == 0) || (col == _grid_width - 1))
 			{
 				// Set this cell as obstacle
-				grid_matrix[row][col] = 1;
+				_grid_matrix[row][col] = 1;
 			}
 			// The current cell doesn't belong to the last row or last col
 			else
@@ -141,7 +161,7 @@ void Map::ConvertMapToGrid(int**& map_matrix, int**& grid_matrix, int grid_rows,
 					for (int j = 0; j < resolutions_ratio && !obstacle_found; ++j)
 					{
 						// Checking if the current cell in the pixels matrix is not FREE
-						if (map_matrix[(row * resolutions_ratio) + i][(col * resolutions_ratio) + j] != 0)
+						if (_map_matrix[(row * resolutions_ratio) + i][(col * resolutions_ratio) + j] != 0)
 						{
 							obstacle_found = true;
 						}
@@ -151,15 +171,55 @@ void Map::ConvertMapToGrid(int**& map_matrix, int**& grid_matrix, int grid_rows,
 				// Checking if we found at least one obstacle (and then this grid cell should be OCCUPIED)
 				if (obstacle_found)
 				{
-					grid_matrix[row][col] = 1;
+					_grid_matrix[row][col] = 1;
 				}
 				// There is no obstacles so this cell should be FREE
 				else
 				{
-					grid_matrix[row][col] = 0;
+					_grid_matrix[row][col] = 0;
 				}
 			}
 		}
 	}
+}
+
+int Map::GetGridIndexByMapIndex(int map_index)
+{
+	int resolutions_ratio = Map::grid_resolution_in_cm / Map::map_resolution_in_cm;
+
+	return (map_index / resolutions_ratio);
+}
+
+void Map::WriteMapMatrixToPng(int**& map_matrix, int height, int width, const char* filename)
+{
+	std::vector<unsigned char> navImage;
+	navImage.resize(width * height * 4);
+	unsigned char color;
+
+	for (int row = 0; row < height; row++)
+	{
+		for (int col = 0; col < width; col++)
+		{
+			if (map_matrix[row][col] == 0)
+			{
+				color = 255;
+			}
+			else if (map_matrix[row][col] == 1)
+			{
+				color = 0;
+			}
+			else if (map_matrix[row][col] == 2)
+			{
+				color = 128;
+			}
+
+			navImage[row * width * 4 + col * 4 + 0] = color;
+			navImage[row * width * 4 + col * 4 + 1] = color;
+			navImage[row * width * 4 + col * 4 + 2] = color;
+			navImage[row * width * 4 + col * 4 + 3] = 255;
+		}
+	}
+
+	encodeOneStep(filename, navImage, width, height);
 }
 
