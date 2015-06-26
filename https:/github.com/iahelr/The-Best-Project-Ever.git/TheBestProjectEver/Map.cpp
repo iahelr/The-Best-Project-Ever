@@ -120,14 +120,14 @@ void Map::ConvertMapToGrid()
 	int resolutions_ratio = Map::grid_resolution_in_cm / Map::map_resolution_in_cm;
 
 	// Set the grid matrix dimensions
-	_grid_height = _map_height / resolutions_ratio + (_map_height % resolutions_ratio == 0 ? 0 : 1);
-	_grid_width = _map_width / resolutions_ratio + (_map_width % resolutions_ratio == 0 ? 0 : 1);
+	_grid._height = _map._height / resolutions_ratio + (_map._height % resolutions_ratio == 0 ? 0 : 1);
+	_grid._width = _map._width / resolutions_ratio + (_map._width % resolutions_ratio == 0 ? 0 : 1);
 
 	// Create the grid matrix
-	_grid_matrix = new int*[_grid_height];
-	for (int row = 0; row < _grid_height; row++)
+	_grid._matrix = new int*[_grid._height];
+	for (int row = 0; row < _grid._height; row++)
 	{
-		_grid_matrix[row] = new int[_grid_width];
+		_grid._matrix[row] = new int[_grid._width];
 	}
 
 	/*
@@ -135,16 +135,16 @@ void Map::ConvertMapToGrid()
 	 */
 
 	// Running over all the grid rows
-	for (int row = 0; row < _grid_height; row++)
+	for (int row = 0; row < _grid._height; row++)
 	{
 		// Running over all the grid cols
-		for (int col = 0; col < _grid_width; col++)
+		for (int col = 0; col < _grid._width; col++)
 		{
 			// Checking if the current cell belongs to borders of the map
-			if ((row == 0) || (row == _grid_height - 1) || (col == 0) || (col == _grid_width - 1))
+			if ((row == 0) || (row == _grid._height - 1) || (col == 0) || (col == _grid._width - 1))
 			{
 				// Set this cell as obstacle
-				_grid_matrix[row][col] = 1;
+				_grid._matrix[row][col] = 1;
 			}
 			// The current cell doesn't belong to the last row or last col
 			else
@@ -161,7 +161,7 @@ void Map::ConvertMapToGrid()
 					for (int j = 0; j < resolutions_ratio && !obstacle_found; ++j)
 					{
 						// Checking if the current cell in the pixels matrix is not FREE
-						if (_map_matrix[(row * resolutions_ratio) + i][(col * resolutions_ratio) + j] != 0)
+						if (_map._matrix[(row * resolutions_ratio) + i][(col * resolutions_ratio) + j] != 0)
 						{
 							obstacle_found = true;
 						}
@@ -171,12 +171,12 @@ void Map::ConvertMapToGrid()
 				// Checking if we found at least one obstacle (and then this grid cell should be OCCUPIED)
 				if (obstacle_found)
 				{
-					_grid_matrix[row][col] = 1;
+					_grid._matrix[row][col] = 1;
 				}
 				// There is no obstacles so this cell should be FREE
 				else
 				{
-					_grid_matrix[row][col] = 0;
+					_grid._matrix[row][col] = 0;
 				}
 			}
 		}

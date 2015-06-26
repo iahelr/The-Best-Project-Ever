@@ -4,22 +4,34 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Consts.cpp \
+../IntMatrix.cpp \
+../LocationMatrix.cpp \
 ../Manager.cpp \
 ../Map.cpp \
+../PathFinder.cpp \
 ../Robot.cpp \
 ../Utils.cpp \
 ../main.cpp 
 
 OBJS += \
+./Consts.o \
+./IntMatrix.o \
+./LocationMatrix.o \
 ./Manager.o \
 ./Map.o \
+./PathFinder.o \
 ./Robot.o \
 ./Utils.o \
 ./main.o 
 
 CPP_DEPS += \
+./Consts.d \
+./IntMatrix.d \
+./LocationMatrix.d \
 ./Manager.d \
 ./Map.d \
+./PathFinder.d \
 ./Robot.d \
 ./Utils.d \
 ./main.d 

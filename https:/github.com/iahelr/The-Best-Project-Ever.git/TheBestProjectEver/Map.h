@@ -10,8 +10,13 @@
 
 #include "PngUtils/lodepng.h"
 #include "PngUtils/pngUtil.h"
+#include "IntMatrix.h"
+#include "Consts.h"
+#include "Utils/Location.h"
 #include <iostream>
 #include <vector>
+
+using namespace std;
 
 class Map
 {
@@ -19,13 +24,8 @@ public:
 	static double map_resolution_in_cm;
 	static double grid_resolution_in_cm;
 
-	int _map_height;
-	int _map_width;
-	int** _map_matrix;
-
-	int _grid_height;
-	int _grid_width;
-	int** _grid_matrix;
+	IntMatrix _map;
+	IntMatrix _grid;
 
 public:
 	Map();

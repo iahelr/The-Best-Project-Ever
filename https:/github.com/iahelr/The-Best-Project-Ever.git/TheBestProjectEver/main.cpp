@@ -10,6 +10,8 @@
 #include "Plans/PlnObstacleAvoid.h"
 #include "Map.h"
 #include "Utils.h"
+#include "PathFinder.h"
+#include "Utils/Location.h"
 
 #include <fstream>
 
@@ -93,7 +95,7 @@ int main()
 		Map mapObj;
 
 		// Read the map from png file and put it in the map matrix
-		Map::ReadMapFromPngToMatrix(map_path.c_str(), mapObj._map_matrix, mapObj._map_height, mapObj._map_width);
+		Map::ReadMapFromPngToMatrix(map_path.c_str(), mapObj._map._matrix, mapObj._map._height, mapObj._map._width);
 
 		// Calculate how much cells (pixels) we need to blow around each obstacle in the map
 		int blowing_factor = ((robot_size / 2) / Map::map_resolution_in_cm) +
@@ -102,7 +104,7 @@ int main()
 		//Map::WriteMapMatrixToPng(mapObj._map_matrix, mapObj._map_height, mapObj._map_width, "before_blow.png");
 
 		// Blow the map
-		Map::BlowMap(mapObj._map_matrix, mapObj._map_height, mapObj._map_width, blowing_factor);
+		Map::BlowMap(mapObj._map._matrix, mapObj._map._height, mapObj._map._width, blowing_factor);
 
 		//Map::WriteMapMatrixToPng(mapObj._map_matrix, mapObj._map_height, mapObj._map_width, "after_blow.png");
 
@@ -112,10 +114,20 @@ int main()
 		//Map::WriteMapMatrixToPng(mapObj._grid_matrix, mapObj._grid_height, mapObj._grid_width, "grid_result.png");
 
 		cout << endl << "finish!!!!!!" << endl;
+		Location robotLoc(robot_location_x, robot_location_y);
+		Location destLoc(dest_x, dest_y);
+		PathFinder pathFinder(mapObj);
+			//ComplexLocation initialComplexLocation = ConfigurationsManager::getRobotInitialLocation();
+			pathFinder.findPath(robotLoc, destLoc);
+
+			//pathFinder.saveMapWithRoughPath("roughPath.png");
 	}
 
 	//Robot robot("localhost",6665);
 	//PlnObstacleAvoid plnOA(&robot);
 	//Manager manager(&robot, &plnOA);
 	//manager.run();
+
+
+
 }
