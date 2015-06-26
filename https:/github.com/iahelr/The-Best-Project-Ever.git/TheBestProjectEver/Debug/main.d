@@ -24,8 +24,7 @@ main.d: ../main.cpp ../Robot.h \
  ../AStar/MapHolderAStar.h ../AStar/../Utils/Location.h \
  ../AStar/../IntMatrix.h ../AStar/../LocationMatrix.h \
  ../AStar/../Utils/PriorityQueue.h ../AStar/../Utils/Location.h \
- ../AStar/MapHolderAStar.h ../WayPointManager.h ../Utils/WayPoint.h \
- ../Utils/Location.h
+ ../AStar/MapHolderAStar.h
 
 ../Robot.h:
 
@@ -118,9 +117,3 @@ main.d: ../main.cpp ../Robot.h \
 ../AStar/../Utils/Location.h:
 
 ../AStar/MapHolderAStar.h:
-
-../WayPointManager.h:
-
-../Utils/WayPoint.h:
-
-../Utils/Location.h:
