@@ -12,6 +12,7 @@ CPP_SRCS += \
 ../PathFinder.cpp \
 ../Robot.cpp \
 ../Utils.cpp \
+../WayPointManager.cpp \
 ../main.cpp 
 
 OBJS += \
@@ -23,6 +24,7 @@ OBJS += \
 ./PathFinder.o \
 ./Robot.o \
 ./Utils.o \
+./WayPointManager.o \
 ./main.o 
 
 CPP_DEPS += \
@@ -34,6 +36,7 @@ CPP_DEPS += \
 ./PathFinder.d \
 ./Robot.d \
 ./Utils.d \
+./WayPointManager.d \
 ./main.d 
 
 
