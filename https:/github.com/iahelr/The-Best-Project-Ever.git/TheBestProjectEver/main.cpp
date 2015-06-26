@@ -99,7 +99,7 @@ int main()
 
 		// Calculate how much cells (pixels) we need to blow around each obstacle in the map
 		int blowing_factor = ((robot_size / 2) / Map::map_resolution_in_cm) +
-							 (fmod(robot_size, Map::map_resolution_in_cm) == 0 ? 0 : 1);
+							 (fmod(robot_size / 2, Map::map_resolution_in_cm) == 0 ? 0 : 1);
 
 		//Map::WriteMapMatrixToPng(mapObj._map_matrix, mapObj._map_height, mapObj._map_width, "before_blow.png");
 
@@ -113,14 +113,25 @@ int main()
 
 		//Map::WriteMapMatrixToPng(mapObj._grid_matrix, mapObj._grid_height, mapObj._grid_width, "grid_result.png");
 
-		cout << endl << "finish!!!!!!" << endl;
+		/*// Create the map object
+		Map mapObj2;
+
+		// Read the map from png file and put it in the map matrix
+		Map::ReadMapFromPngToMatrix("/home/colman/Documents/LunaWorkSpace/WriteToPng/maze3.png", mapObj2._map._matrix, mapObj2._map._height, mapObj2._map._width);
+		Map::BlowMap(mapObj2._map._matrix, mapObj2._map._height, mapObj2._map._width, 10);
+		//Map::WriteMapMatrixToPng(mapObj2._map._matrix, mapObj2._map._height, mapObj2._map._width, "maze6onlyblow.png");
+		PathFinder pathFinder2(mapObj2);
+		//pathFinder2.findPath(Location(25, 580), Location(570, 570));
+		pathFinder2.findPath(Location(566, 877), Location(508, 510));*/
+
+
 		Location robotLoc(robot_location_x, robot_location_y);
 		Location destLoc(dest_x, dest_y);
 		PathFinder pathFinder(mapObj);
-			//ComplexLocation initialComplexLocation = ConfigurationsManager::getRobotInitialLocation();
-			pathFinder.findPath(robotLoc, destLoc);
+		//ComplexLocation initialComplexLocation = ConfigurationsManager::getRobotInitialLocation();
+		pathFinder.findPath(robotLoc, destLoc);
 
-			//pathFinder.saveMapWithRoughPath("roughPath.png");
+		cout << endl << "finish!!!!!!" << endl;
 	}
 
 	//Robot robot("localhost",6665);

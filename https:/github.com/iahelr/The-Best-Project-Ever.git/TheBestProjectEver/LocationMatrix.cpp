@@ -24,7 +24,7 @@ bool LocationMatrix::isPositionValid(unsigned x, unsigned y)
 
 bool LocationMatrix::isPositionDefault(Location pos)
 {
-	return (_matrix[pos.getX()][pos.getY()].getX() == _defaultValue.getX() &&
-			_matrix[pos.getX()][pos.getY()].getY() == _defaultValue.getY());
+	return (_matrix[pos.getY()][pos.getX()].getX() == _defaultValue.getX() &&
+			_matrix[pos.getY()][pos.getX()].getY() == _defaultValue.getY());
 }
 

@@ -19,27 +19,31 @@ Location::~Location() {
 Location Location::getRelativePosition(Directions direction)
 {
 	Location relative;
-	switch(direction){
+	switch(direction)
+	{
 	case Up:
-		relative = Location(getX(),getY() + 1);
+		relative = Location(getX(), getY() - 1);
 		break;
 	case Up_Right:
-		relative = Location(getX() + 1,getY() + 1);
+		relative = Location(getX() + 1, getY() - 1);
 		break;
 	case Right:
-		relative = Location(getX() + 1,getY());
+		relative = Location(getX() + 1, getY());
 		break;
 	case Down_Right:
-		relative = Location(getX() + 1,getY() - 1);
+		relative = Location(getX() + 1, getY() + 1);
 		break;
 	case Down:
-		relative = Location(getX(),getY() - 1);
+		relative = Location(getX(), getY() + 1);
 		break;
 	case Down_Left:
-		relative = Location(getX() -1 ,getY() - 1);
+		relative = Location(getX() - 1 , getY() + 1);
+		break;
+	case Left:
+		relative = Location(getX() - 1, getY());
 		break;
 	case Up_Left:
-		relative = Location(getX() - 1,getY() + 1);
+		relative = Location(getX() - 1, getY() - 1);
 		break;
 	}
 

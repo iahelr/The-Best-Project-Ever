@@ -21,6 +21,19 @@ public:
 	LocationMatrix();
 	virtual ~LocationMatrix();
 
+	void DefineSize(int height, int width)
+	{
+		_height = height;
+		_width = width;
+
+		// Initialize the matrix
+		_matrix = new Location*[_height];
+		for (int row = 0; row < height; row++)
+		{
+			_matrix[row] = new Location[width];
+		}
+	};
+
 	bool isPositionValid(unsigned x, unsigned y);
 	bool isPositionDefault(Location pos);
 };

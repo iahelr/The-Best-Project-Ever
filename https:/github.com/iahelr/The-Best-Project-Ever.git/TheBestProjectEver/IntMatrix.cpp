@@ -24,6 +24,6 @@ bool IntMatrix::isPositionValid(unsigned x, unsigned y)
 
 bool IntMatrix::isPositionDefault(Location pos)
 {
-	return (_matrix[pos.getX()][pos.getY()] == _defaultValue);
+	return (_matrix[pos.getY()][pos.getX()] == _defaultValue);
 }
 

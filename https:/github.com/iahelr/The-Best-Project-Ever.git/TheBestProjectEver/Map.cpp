@@ -68,7 +68,7 @@ void Map::ReadMapFromPngToMatrix(const char* filename, int**& map_matrix, int& r
 	}
 }
 
-void Map::BlowCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int blowing_factor)
+void Map::BlowCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int blowing_factor, int blow_indication)
 {
 	// Set the cell indices where to start scan the blown cells matrix
 	int nBlowedMatrixRowStart = cell_row - blowing_factor;
@@ -90,7 +90,7 @@ void Map::BlowCell(int**& map_matrix, int height, int width, int cell_row, int c
 				if (map_matrix[row_index][col_index] == 0)
 				{
 					// Set this cell as blown
-					map_matrix[row_index][col_index] = 2;
+					map_matrix[row_index][col_index] = blow_indication;
 				}
 			}
 		}
@@ -109,7 +109,7 @@ void Map::BlowMap(int**& map_matrix, int height, int width, int blowing_factor)
 			if (map_matrix[row][col] == 1)
 			{
 				// Blow the current cell
-				BlowCell(map_matrix, height, width, row, col, blowing_factor);
+				BlowCell(map_matrix, height, width, row, col, blowing_factor, 2);
 			}
 		}
 	}
@@ -209,6 +209,10 @@ void Map::WriteMapMatrixToPng(int**& map_matrix, int height, int width, const ch
 				color = 0;
 			}
 			else if (map_matrix[row][col] == 2)
+			{
+				color = 255;
+			}
+			else if (map_matrix[row][col] == 5)
 			{
 				color = 128;
 			}

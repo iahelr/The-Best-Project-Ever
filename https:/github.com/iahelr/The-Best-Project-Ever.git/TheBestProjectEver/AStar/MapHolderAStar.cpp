@@ -24,7 +24,8 @@ vector<Location> MapHolderAStar::neighbors(Location center)
 	{
 		Location neighbor = center.getRelativePosition((Directions)direction);
 
-		if ((_mapObj._map.isPositionValid(neighbor.getX(), neighbor.getY())) && (_mapObj._map._matrix[neighbor.getX()][neighbor.getY()] != 1))
+		if ((_mapObj._map.isPositionValid(neighbor.getX(), neighbor.getY())) &&
+			(_mapObj._map._matrix[neighbor.getY()][neighbor.getX()] == 0))
 		{
 			neighbors.push_back(neighbor);
 		}
@@ -35,6 +36,6 @@ vector<Location> MapHolderAStar::neighbors(Location center)
 
 unsigned MapHolderAStar::cost(Location from, Location to)
 {
-	return max(_costs._matrix[from.getX()][from.getY()],_costs._matrix[to.getX()][to.getY()]);
+	return max(_costs._matrix[from.getY()][from.getX()],_costs._matrix[to.getY()][to.getX()]);
 }
 

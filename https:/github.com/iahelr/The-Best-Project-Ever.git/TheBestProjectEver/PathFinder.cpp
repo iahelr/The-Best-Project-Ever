@@ -11,7 +11,7 @@
 PathFinder::PathFinder(Map map)
 {
 	this->_map = map;
-
+	_costsMap.DefineSize(map._map._height, map._map._width);
 }
 
 //************
@@ -19,30 +19,33 @@ PathFinder::PathFinder(Map map)
 //************
 void PathFinder::findPath(Location source, Location destination)
 {
-
 	// a graph object
 	MapHolderAStar graphObject(_map);
 
-	/*
-	// DEBUG
-	this->_mapRoughPath = Map(_map);
-	_mapRoughPath.setCellAtPosition(sourceCell,Source);
-	_mapRoughPath.setCellAtPosition(destinationCell,Target);
-	Utils::writeMapToPng("locations.png", _mapWithRoughPath);
-	// DEBUG END
-	 *
-	 */
-
 	// Apply A*
 	_searcher.aStarSearch(graphObject, source, destination, _parentsMap, _costsMap);
-	//_searcher.aStarSearch(graphObject,source,destination,_parentsMap, _costsMap);
 
 	// Get path from parents map
-	_resultPath = pathFromParentMap(source,destination);
+	_resultPath = pathFromParentMap(source, destination);
 
-	// Copy the original map and assign the path
-	//this->_mapRoughPath = Map(_map);
-	/*Utils::insertPathToMap(_mapRoughPath,_roughlocationsVector);
-	_mapRoughPath.setCellAtPosition(sourceCell,Source);
-	_mapRoughPath.setCellAtPosition(destinationCell,Target);*/
+	// Copy the original map
+	IntMatrix mapWithPath;
+	mapWithPath.DefineSize(_map._map._height, _map._map._width);
+	for (int row = 0; row < _map._map._height; ++row)
+	{
+		for (int col = 0; col < _map._map._width; ++col)
+		{
+			mapWithPath._matrix[row][col] = _map._map._matrix[row][col];
+		}
+	}
+
+	// Add the path to the map
+	for (int i = 0; i < _resultPath.size(); i++)
+	{
+		Location location = _resultPath[i];
+		mapWithPath._matrix[location.getY()][location.getX()] = 5;
+	}
+
+	// Save the map with the path to PNG file
+	Map::WriteMapMatrixToPng(mapWithPath._matrix, mapWithPath._height, mapWithPath._width, "mapWithPath.png");
 }

@@ -15,11 +15,8 @@ class PathFinder
 private:
 	Map _map;
 	vector<Location> _resultPath;
-
 	vector<Location> _locationsMatrix;
-
 	AStarSearcher _searcher;
-
 	LocationMatrix _parentsMap;
 	IntMatrix _costsMap;
 
@@ -60,14 +57,11 @@ private :
 		Location current = to;
 
 		path.insert(path.begin(),current);
-		//cout << LOG_DEBUG << " Pushed X=" << current.getX() << ", Y=" << current.getY() << endl;
 
-		while((current.getX() != from.getX()) || (current.getY() != from.getY()))
+		while ((current.getX() != from.getX()) || (current.getY() != from.getY()))
 		{
-			current = _parentsMap._matrix[current.getX()][current.getY()];
-
+			current = _parentsMap._matrix[current.getY()][current.getX()];
 			path.insert(path.begin(),current);
-			//cout << LOG_DEBUG << " Pushed X=" << current.getX() << ", Y=" << current.getY() << endl;
 		}
 
 		return path;

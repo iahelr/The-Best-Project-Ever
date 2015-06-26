@@ -16,72 +16,49 @@ void AStarSearcher::aStarSearch(MapHolderAStar mapGraph,
 		LocationMatrix& parentsMap,
 		IntMatrix& costMap)
 {
+	// Define the sizes of the matrixes
+	parentsMap.DefineSize(mapGraph._mapObj._map._height, mapGraph._mapObj._map._width);
+	costMap.DefineSize(mapGraph._mapObj._map._height, mapGraph._mapObj._map._width);
+	costMap._defaultValue = 0;
+
 	PriorityQueue frontier;
-
-	/*cout << "From is : " ;
-	start.printString();
-	cout << endl;
-
-	cout << "Target is : " ;
-	target.printString();
-	cout << endl;*/
-
 
 	// initialize the start node
 	frontier.put(start, 0);
-	//parentsMap.setValueAtPosition(start,start);
-	//costMap.setValueAtPosition(start,0);
-	parentsMap._matrix[start.getX()][start.getY()] = start;
-	costMap._matrix[start.getX()][start.getY()] = 0;
+	parentsMap._matrix[start.getY()][start.getX()] = start;
+	costMap._matrix[start.getY()][start.getX()] = 0;
 
 	// Perform the search
 	while (!frontier.empty())
 	{
 		Location current = frontier.get();
-
-
-		/*if (current == target){
-			cout << LOG_INFO << "Reached target" << endl;
-			break;
-		}*/
-
 		vector<Location> neighbors = mapGraph.neighbors(current);
+
+		// Run over all the neighbors of the current location
 		for (int i = 0; i < neighbors.size(); i++)
 		{
 			Location next = neighbors[i];
-			int newCost = costMap._matrix[current.getX()][current.getY()] + mapGraph.cost(current,next);
 
-			// Is the next node was not reached yet ? or dose the new cost is lower than
-			// the cast it had so far ?
-			if ((costMap.isPositionDefault(next)) || (newCost < costMap._matrix[next.getX()][next.getY()]))
+			int newCost = costMap._matrix[current.getY()][current.getX()] + mapGraph.cost(current,next);
+
+			// Checking if we didn't visit yet in the next node or the new cost is lower than the existing
+			// cost of the next node
+			if ((costMap.isPositionDefault(next)) || (newCost < costMap._matrix[next.getY()][next.getX()]))
 			{
-
-				/*cout << LOG_DEBUG << "Astar on node X=" << next.getX() << " and Y=" << next.getY() << " Because : ";
-				if (costMap.isPositionDefault(next))
-				{
-					cout << "Node was not visited, given cost is " << newCost << endl;
-				}
-				else
-				{
-					cout << newCost <<  " is cheaper than " << costMap[next] << endl;
-				}*/
-
-				costMap._matrix[next.getX()][next.getY()] = newCost;
-
+				costMap._matrix[next.getY()][next.getX()] = newCost;
 
 				// Get the new priority of the node
 				int priority = newCost + AStarSearcher::heuristic(next, target);
 
 				frontier.put(next, priority);
-				parentsMap._matrix[next.getX()][next.getY()] = current;
-				// cout << "X=" << next.getX() << ",Y=" << next.getY() << " parent is X=" <<cameFrom[next].getX() << ",Y=" << cameFrom[next].getY() <<endl;
+				parentsMap._matrix[next.getY()][next.getX()] = current;
 			}
 		}
 	}
-	//cout << LOG_DEBUG << "Finished A* getting path "  << endl;
+
 	if (parentsMap.isPositionDefault(target))
 	{
-		cout << "Target was never reached" << endl;
+		cout << "Target wasn't reached" << endl;
 	}
 }
 

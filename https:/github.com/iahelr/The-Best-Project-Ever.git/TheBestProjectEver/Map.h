@@ -31,7 +31,7 @@ public:
 	Map();
 	virtual ~Map();
 	static void ReadMapFromPngToMatrix(const char* filename, int**& map_matrix, int& rows, int& cols);
-	static void BlowCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int blow_factor);
+	static void BlowCell(int**& map_matrix, int height, int width, int cell_row, int cell_col, int blow_factor, int blow_indication);
 	static void BlowMap(int**& map_matrix, int height, int width, int blow_factor);
 	void ConvertMapToGrid();
 	static int GetGridIndexByMapIndex(int map_index);
