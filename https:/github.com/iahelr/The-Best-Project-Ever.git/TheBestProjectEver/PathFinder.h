@@ -42,7 +42,7 @@ public:
 	 * Orders the class to find the path from source to destination and
 	 * keep it.
 	 */
-	void findPath(Location source, Location destination);
+	vector<Location> findPath(Location source, Location destination);
 
 private :
 

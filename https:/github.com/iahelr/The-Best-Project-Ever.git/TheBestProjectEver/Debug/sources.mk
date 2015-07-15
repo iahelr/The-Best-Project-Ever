@@ -27,6 +27,7 @@ SUBDIRS := \
 Utils \
 PngUtils \
 Plans \
+Manager \
 Behaviors \
 AStar \
 

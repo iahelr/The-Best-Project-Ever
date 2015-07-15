@@ -7,11 +7,12 @@
 
 #include "WayPointManager.h"
 
-WayPointManager::WayPointManager(vector<Location> path, Map map) {
+WayPointManager::WayPointManager(vector<Location> path, Map map, ConfigurationParametersStruct ParametersStruct)
+{
 	this->_originalMap = map;
 
 	// Chose grid position way points
-	this->initializePositionsArray(path);
+	this->initializePositionsArray(path, ParametersStruct);
 
 	// Make the locations vector from the
 	initializeWayPointsWrray();

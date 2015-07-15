@@ -11,6 +11,7 @@ RM := rm -rf
 -include Utils/subdir.mk
 -include PngUtils/subdir.mk
 -include Plans/subdir.mk
+-include Manager/subdir.mk
 -include Behaviors/subdir.mk
 -include AStar/subdir.mk
 -include subdir.mk

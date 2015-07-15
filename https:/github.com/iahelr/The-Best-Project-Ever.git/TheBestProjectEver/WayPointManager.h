@@ -11,14 +11,18 @@
 #include <vector>
 
 #include "WayPointManager.h"
+#include "Manager/CofigurationManager.h"
 #include "LocationMatrix.h"
 #include "Utils/Location.h"
 #include "Utils/WayPoint.h"
 #include "Map.h"
+#include <cmath>
+
 
 using namespace std;
 
-class WayPointManager {
+class WayPointManager
+{
 private :
 
 	Map _originalMap;
@@ -28,7 +32,7 @@ private :
 
 public:
 
-	WayPointManager(vector<Location> path, Map map);
+	WayPointManager(vector<Location> path, Map map, ConfigurationParametersStruct ParametersStruct);
 
 	/**
 	 * as long as we are not in the last way point , increase _currentWayPoint and return
@@ -43,25 +47,29 @@ public:
 	/**
 	 * Returns the current way point
 	 */
-	WayPoint getCurrnetWayPoint(){
+	WayPoint getCurrnetWayPoint()
+	{
 		return _wayPoints[_currentWayPoint];
 	}
 
 	/**
 	 * Gets a specific way point
 	 */
-	WayPoint getWayPointNumber(unsigned number){
+	WayPoint getWayPointNumber(unsigned number)
+	{
 		return _wayPoints[number];
 	}
 
 	/**
 	 * Returns the amount of way points available in the given path
 	 */
-	unsigned getNumberOfWayPoints(){
+	unsigned getNumberOfWayPoints()
+	{
 		return _wayPoints.size();
 	}
 
-	vector<Location> getChosenPositions(){
+	vector<Location> getChosenPositions()
+			{
 		return _positions;
 	}
 
@@ -69,7 +77,8 @@ public:
 	//*****************
 	//	Public methods
 	//*****************
-	void savePointsOnMap(string name){
+	void savePointsOnMap(string name)
+	{
 		//Utils::writeMapToPng(name,_originalMap);//TODO:ori - write map to png?
 	}
 
@@ -78,8 +87,10 @@ private:
 	 * Gets a path of GridPoisitions and chose a selected amount of
 	 * Way points (takes one every 2 times robot size).
 	 */
-	void initializePositionsArray(vector<Location> path){
-		/*int robotsInPixel = ConfigurationsManager::getRobotSize() / _originalMap.getCell2Cm(); //TODO:Ori - Robot size and this other things that need to filled up..
+	void initializePositionsArray(vector<Location> path, ConfigurationParametersStruct ParametersStruct)
+	{
+		int robotSize = fmax(ParametersStruct.robot_size_x, ParametersStruct.robot_size_y);
+		int robotsInPixel = robotSize / ParametersStruct.map_res_in_cm;
 
 		int jumps = robotsInPixel * 2;
 
@@ -95,16 +106,24 @@ private:
 		// Remove the first node
 		_positions.erase(_positions.begin());
 
-		Utils::insertPathToMap(_originalMap,_positions); //TODO:ori - need adapt here too..method that insert path to the map..
-	*/}
+		// Add the path to the map
+		for (int i = 0; i < path.size(); i++)
+		{
+			Location location = path[i];
+			_originalMap._map._matrix[location.getY()][location.getX()] = 5;
+		}
+
+		Map::WriteMapMatrixToPng(_originalMap._map._matrix, _originalMap._map._height, _originalMap._map._width , "WayPointsOnMapMap.png");
+	}
 
 	/**
 	 * Transforms the chosen grid positions to way points
 	 */
-	void initializeWayPointsWrray(){
-		for (unsigned i = 0; i < _positions.size() ; i++){
-			/*Location loc = _originalMap.locationFromPosition(_positions[i]); // TODO: ori - need to add these method (LocationFromPosition)
-			this->_wayPoints.push_back(WayPoint(loc,i));*/
+	void initializeWayPointsWrray()
+	{
+		for (unsigned i = 0; i < _positions.size() ; i++)
+		{
+			this->_wayPoints.push_back(WayPoint(_positions[i],i));
 		}
 	}
 };

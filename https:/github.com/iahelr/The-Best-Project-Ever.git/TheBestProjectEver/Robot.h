@@ -12,7 +12,8 @@
 
 using namespace PlayerCc;
 
-class Robot {
+class Robot
+{
 	PlayerClient* _pc;
 	Position2dProxy* _pp;
 	LaserProxy* _lp;

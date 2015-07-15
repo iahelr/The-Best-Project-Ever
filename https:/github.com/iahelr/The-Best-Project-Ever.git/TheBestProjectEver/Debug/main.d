@@ -17,15 +17,24 @@ main.d: ../main.cpp ../Robot.h \
  ../Plans/../Behaviors/Behavior.h ../Plans/Plan.h ../Plans/../Robot.h \
  ../Plans/../Behaviors/A.h ../Plans/../Behaviors/Behavior.h \
  ../Plans/../Behaviors/../Robot.h ../Plans/../Behaviors/B.h \
- ../Plans/../Behaviors/C.h ../Map.h ../PngUtils/lodepng.h \
- ../PngUtils/pngUtil.h ../IntMatrix.h ../Utils/Location.h \
- ../Utils/../Consts.h ../Consts.h ../Utils.h ../PathFinder.h \
- ../LocationMatrix.h ../AStar/AStarSearcher.h ../AStar/../Map.h \
- ../AStar/MapHolderAStar.h ../AStar/../Utils/Location.h \
- ../AStar/../IntMatrix.h ../AStar/../LocationMatrix.h \
- ../AStar/../Utils/PriorityQueue.h ../AStar/../Utils/Location.h \
- ../AStar/MapHolderAStar.h ../WayPointManager.h ../Utils/WayPoint.h \
- ../Utils/Location.h
+ ../Plans/../Behaviors/C.h ../Manager/MapHandler.h ../Manager/../Map.h \
+ ../Manager/../PngUtils/lodepng.h ../Manager/../PngUtils/pngUtil.h \
+ ../Manager/../IntMatrix.h ../Manager/../Utils/Location.h \
+ ../Manager/../Utils/../Consts.h ../Manager/../Consts.h \
+ ../Manager/../PathFinder.h ../Manager/../LocationMatrix.h \
+ ../Manager/../AStar/AStarSearcher.h ../Manager/../AStar/../Map.h \
+ ../Manager/../AStar/MapHolderAStar.h \
+ ../Manager/../AStar/../Utils/Location.h \
+ ../Manager/../AStar/../IntMatrix.h \
+ ../Manager/../AStar/../LocationMatrix.h \
+ ../Manager/../AStar/../Utils/PriorityQueue.h \
+ ../Manager/../AStar/../Utils/Location.h \
+ ../Manager/../AStar/MapHolderAStar.h ../Manager/../Utils/Location.h \
+ ../Manager/../Manager/CofigurationManager.h \
+ ../Manager/../Manager/../Utils.h ../WayPointManager.h \
+ ../Manager/CofigurationManager.h ../LocationMatrix.h ../Utils/Location.h \
+ ../Utils/WayPoint.h ../Utils/Location.h ../Map.h ../Utils.h \
+ ../PathFinder.h
 
 ../Robot.h:
 
@@ -81,46 +90,64 @@ main.d: ../main.cpp ../Robot.h \
 
 ../Plans/../Behaviors/C.h:
 
-../Map.h:
+../Manager/MapHandler.h:
 
-../PngUtils/lodepng.h:
+../Manager/../Map.h:
 
-../PngUtils/pngUtil.h:
+../Manager/../PngUtils/lodepng.h:
 
-../IntMatrix.h:
+../Manager/../PngUtils/pngUtil.h:
 
-../Utils/Location.h:
+../Manager/../IntMatrix.h:
 
-../Utils/../Consts.h:
+../Manager/../Utils/Location.h:
 
-../Consts.h:
+../Manager/../Utils/../Consts.h:
 
-../Utils.h:
+../Manager/../Consts.h:
 
-../PathFinder.h:
+../Manager/../PathFinder.h:
+
+../Manager/../LocationMatrix.h:
+
+../Manager/../AStar/AStarSearcher.h:
+
+../Manager/../AStar/../Map.h:
+
+../Manager/../AStar/MapHolderAStar.h:
+
+../Manager/../AStar/../Utils/Location.h:
+
+../Manager/../AStar/../IntMatrix.h:
+
+../Manager/../AStar/../LocationMatrix.h:
+
+../Manager/../AStar/../Utils/PriorityQueue.h:
+
+../Manager/../AStar/../Utils/Location.h:
+
+../Manager/../AStar/MapHolderAStar.h:
+
+../Manager/../Utils/Location.h:
+
+../Manager/../Manager/CofigurationManager.h:
+
+../Manager/../Manager/../Utils.h:
+
+../WayPointManager.h:
+
+../Manager/CofigurationManager.h:
 
 ../LocationMatrix.h:
 
-../AStar/AStarSearcher.h:
-
-../AStar/../Map.h:
-
-../AStar/MapHolderAStar.h:
-
-../AStar/../Utils/Location.h:
-
-../AStar/../IntMatrix.h:
-
-../AStar/../LocationMatrix.h:
-
-../AStar/../Utils/PriorityQueue.h:
-
-../AStar/../Utils/Location.h:
-
-../AStar/MapHolderAStar.h:
-
-../WayPointManager.h:
+../Utils/Location.h:
 
 ../Utils/WayPoint.h:
 
 ../Utils/Location.h:
+
+../Map.h:
+
+../Utils.h:
+
+../PathFinder.h:

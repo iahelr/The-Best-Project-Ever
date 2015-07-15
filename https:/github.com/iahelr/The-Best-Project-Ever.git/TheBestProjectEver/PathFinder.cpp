@@ -17,7 +17,7 @@ PathFinder::PathFinder(Map map)
 //************
 //	Navigation methods
 //************
-void PathFinder::findPath(Location source, Location destination)
+vector<Location>  PathFinder::findPath(Location source, Location destination)
 {
 	// a graph object
 	MapHolderAStar graphObject(_map);
