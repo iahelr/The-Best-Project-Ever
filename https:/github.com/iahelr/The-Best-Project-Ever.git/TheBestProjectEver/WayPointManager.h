@@ -95,25 +95,27 @@ private:
 		int jumps = robotsInPixel * 2;
 
 		// Naive algorithm , steps that are twice the robots size
-		for(unsigned i=0; i< path.size(); i += jumps){
+		for(unsigned i=0; i< path.size(); i += jumps)
+		{
 			this->_positions.push_back(path[i]);
 		}
 
-		if ((path.size() % jumps) != 0){
+		if ((path.size() % jumps) != 0)
+		{
 			this->_positions.push_back(path[path.size() -1]);
 		}
 
 		// Remove the first node
 		_positions.erase(_positions.begin());
 
-		// Add the path to the map
-		for (int i = 0; i < path.size(); i++)
+		// Add the way points to the map
+		for (int i = 0; i < _positions.size(); i++)
 		{
-			Location location = path[i];
+			Location location = _positions[i];
 			_originalMap._map._matrix[location.getY()][location.getX()] = 5;
 		}
 
-		Map::WriteMapMatrixToPng(_originalMap._map._matrix, _originalMap._map._height, _originalMap._map._width , "WayPointsOnMapMap.png");
+		Map::WriteMapMatrixToPng(_originalMap._map._matrix, _originalMap._map._height, _originalMap._map._width , "WayPointsOnMap.png");
 	}
 
 	/**

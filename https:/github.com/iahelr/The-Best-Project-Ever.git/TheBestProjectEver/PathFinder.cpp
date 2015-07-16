@@ -48,4 +48,7 @@ vector<Location>  PathFinder::findPath(Location source, Location destination)
 
 	// Save the map with the path to PNG file
 	Map::WriteMapMatrixToPng(mapWithPath._matrix, mapWithPath._height, mapWithPath._width, "mapWithPath.png");
+
+	// Return the path
+	return (_resultPath);
 }
